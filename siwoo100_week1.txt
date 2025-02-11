@@ -1,0 +1,185 @@
+
+
+a, b, c = map(int, input().split())
+
+if  a== b== c :
+    prize = 10000 + a * 1000
+elif a==b or a==c :
+    prize = 1000 + a * 100
+elif b==c :
+    prize = 1000 + b * 100
+else :
+    przie = max(a, b, c) * 100
+    
+print(prize) 
+
+런타임에러가 자꾸 뜸 ==  변수 잘못 씀 
+
+-------------------------------------
+
+N, M = map(int,input().split())
+baguni = list(range(1, N+1))
+
+for x in range(M):
+    i, j = map(int,input().split())
+    
+    after = baguni[i-1:j]
+    after.reverse()
+    
+    baguni[i-1:j] = after
+print(baguni)
+
+N, M = map(int,input().split())
+baguni = list(range(1, N+1))
+
+for x in range(M):
+    i, j = map(int,input().split())
+    
+    baguni[i-1:j] =  baguni[i-1:j][::-1]
+
+print(baguni)
+
+
+---------------------------------------
+1 = 1개 
+2-7 = 2개 
+8-19 = 3개
+20-37 = 4개
+38-61 = 5개 
+
+N = int(input())
+
+honeyzip = 1  #벌집수
+honeyzip_count = 1 #최소개수 
+
+while N > honeyzip :
+    honeyzip += honeyzip_count * 6
+    honeyzip_count += 1
+print(honeyzip_count)
+
+--------------------------------------
+N = int(input())
+
+def sosu(num): 
+     if num < 2 :
+        return False 
+    for i in range(2, num): 
+        if num % i == 0: 
+            return False 
+    return True  
+
+sosu_list = list(map(int, input().split())) #숫자를 뽑으면 개수가 많으니까 리스트로 고고 맵이 그냥 정수면 리스트로 감싸
+
+sosu_count = 0 
+for num in sosu_list: 
+    if sosu(num):  
+        sosu_count += 1  
+
+print(sosu_count)  
+
+계속 ㅌㄹ렸다 나옴 왜??? 아 1을 생각안함 
+-------------------------------------------------------
+N = int(input())
+을 입력하면  
+5로 나누고 , 그 몫을 저장하고, 그 나머지를 또 3으로 나누어 그 몫을 저장한다. 만약 3으로 나눌떄  나누어 떨어지지 않는다면 -1을 반환한다. (3,4,5,6은 5와 3 나누는 순서를 반대로하고  그 뒤부터는 위에 적은대로 가기  이런 코드를 만들자 
+
+N = int(input())
+
+def  sugar(N):
+          bag_5 = N // 5
+        more_5 = N % 5
+        
+        if more_5 % 3 != 0:
+            return -1
+        
+        bag_3 = more_5 // 3
+        return bag_5 + bag_3  
+
+minimum_bag = sugar(N)
+print(minimum_bag)
+
+이렇게 하니까 11같은 경우에는 경우가 있음에도 불구하고 -1로 반환되는 경우가 생길수 있음 
+
+알프에서 쓴 seq( a, b, by=)이런거 생각남 
+
+N = int(input())
+def sugarbag(N):
+   
+    bag_5 = N // 5
+    
+    for i in range(bag_5, -1, -1):  
+        sugar = N - (i * 5) 
+        if sugar % 3 == 0:  
+            bag_3 = sugar // 3 
+            return i + bag_3 
+    
+    return -1  
+
+minimum_bag = sugarbag(N)
+print(minimum_bag)
+
+---------------------------------------------------------
+2차원 평면 위의 점 N개가 주어진다. 좌표를 y좌표가 증가하는 순으로, y좌표가 같으면 x좌표가 증가하는 순서로 정렬한 다음 출력하는 프로그램을 작성하시오.
+
+입력
+첫째 줄에 점의 개수 N (1 ≤ N ≤ 100,000)이 주어진다. 둘째 줄부터 N개의 줄에는 i번점의 위치 xi와 yi가 주어진다. (-100,000 ≤ xi, yi ≤ 100,000) 좌표는 항상 정수이고, 위치가 같은 두 점은 없다.
+
+출력
+첫째 줄부터 N개의 줄에 점을 정렬한 결과를 출력한다
+
+
+-------------------------------------------------
+
+def program():
+    N = int(input())
+    wordlist = [input() for x in range(N)]  
+    
+    word_list = list(set(wordlist))
+    word_list.sort(key=lambda x: (len(x), x))   
+
+    for word in word_list:
+        print(word) === 프린트하면 한줄씩 띄어서 나오니까 
+
+program()
+
+-----------------------------------------------
+
+
+def  card():
+    
+    N = int(input())
+    cardset = set(map(int, input().split())) # 카드는 중복이 안될거니까 셋
+    M = int(input())
+    quest = list(map(int, input().split())) # 확인해야 할 카드니까 순서대로 확인....
+
+    result = []
+    for number in quest:
+        if number in cards:
+            result.append(1)
+        else:
+            result.append(0)
+
+    print(" ".join(map(str, result)))
+
+card()
+
+---------------------------------------------------
+
+def find_heard_and_seen():
+   
+    n, m = map(int, input().split())
+    not_heard = set(input().strip() for _ in range(n)) ## 중복 제거 , 반복해서 사람 이름 받음 
+    not_seen = set(input().strip() for _ in range(m))
+ 
+    not_hs = list(not_heard & not_seen) ## 듣보 교집합 구하기 / 리스트 반환
+    not_h_s.sort() ## 사전순 
+    
+    print(len(not_h_s)) ## 리스트 사람 수 
+    
+    for name in not_hs:  ## 이름 하나씩 출력
+        print(name)
+
+find_heard_and_seen()
+
+
+---------------------------------------------------------
